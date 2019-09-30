@@ -1,3 +1,6 @@
 .idea/*
 .idea/
 .pyc
+Pipfile.lock
+
+media/

@@ -5,7 +5,7 @@
         <title>Aptude</title>
     </head>
     <body>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" action="{% url 'main_view' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn form-button" {% if file_url %}disabled{% endif %}>Read CSV</button>
@@ -14,8 +14,16 @@
 
         <form method="post" action="{% url 'store_view' %}">
             {% csrf_token %}
-            <input type="text" value="{{ file_url }}" hidden>
+            <input id="file_url" name="file_url" type="text" value="{{ file_url }}" hidden>
             <button type="submit" class="btn form-button" {% if not file_url %}disabled{% endif %}>DB Store</button>
         </form>
+
+        {% if success %}
+        <p>{{ success }}</p>
+        {% endif %}
+
+        {% if upload_errors %}
+        <p>{{ upload_errors }}</p>
+        {% endif %}
     </body>
 </html>
